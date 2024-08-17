@@ -1,0 +1,22 @@
+import os
+# from api_key import api_key
+from langchain_community.retrievers import TavilySearchAPIRetriever
+from langchain_openai import AzureOpenAI
+from langchain_community.agent_toolkits.load_tools import load_tools
+from dotenv import load_dotenv
+
+
+
+load_dotenv()
+retriever=TavilySearchAPIRetriever(k=1, verbose=True)
+os.environ['TAVILY_API_KEY']="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"
+# response=retriever.invoke("What is the job market outlook for 2024?")
+response=retriever.invoke("What is gold price in india?")
+
+for item in response:
+    print(item)
+    print(item.page_content)
+    print(item.metadata.get('title'))
+    print(item.metadata.get('source'))
+    print(item.metadata.get('score'))
+
